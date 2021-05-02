@@ -1,5 +1,9 @@
 # Arduino HomeKit ESP8266 
 
+
+[中文说明](translations/README_cn.md) | [Português Brasileiro](translations/README-ptbr.md)
+
+
 ## Apple HomeKit accessory server library for ESP8266 Arduino
 
 This Arduino library is a native Apple HomeKit accessory implementation for the [ESP8266 Arduino core](https://github.com/esp8266/Arduino), and works without any additional bridges.
@@ -8,11 +12,13 @@ This project is mainly based on [esp-homekit](https://github.com/maximkulkin/esp
 
 I ported the RTOS-based implementation of [esp-homekit](https://github.com/maximkulkin/esp-homekit) to the pure Arduino environment, aimed at easy and fast building project using Arduino IDE (or Eclipse with sloeber, PlatformIO).
 
-Enjoy the "one-key" build, "one-key" upload, and work to link various other Arduino libraries with Apple Homekit!
+Enjoy the "one-key" build, "one-key" upload, and work to link various other Arduino libraries with Apple HomeKit!
 
 Here is a [discussion](https://github.com/HomeACcessoryKid/Arduino-HomeKit/issues/1) about the RTOS is required for running Apple HomeKit, and this project is a proof of concept that Apple HomeKit can be implemented and work fine without the RTOS.
 
 This library is built with ESP8266 Arduino Core 2.6.3. Lower versions may compile with errors.
+
+For ESP32, see [Arduino-HomeKit-ESP32](https://github.com/Mixiaoxiao/Arduino-HomeKit-ESP32). The HomeKit running on ESP32 has a **GREAT PERFORMANCE** which is 10x faster than ESP8266.
 
 ## Preview
 
@@ -54,7 +60,7 @@ This library is built with ESP8266 Arduino Core 2.6.3. Lower versions may compil
 	```
 Done.
 
-## Performance 
+## Performance
 
 Notice: You should set the ESP8266 CPU to run at 160MHz (at least during the pairing process), to avoid the tcp-socket disconnection from iOS device caused by timeout.
 
@@ -132,15 +138,6 @@ After memory optimization in v1.1.0:
 * `ESP8266WiFi` (WiFiServer and WiFiClient) is used for tcp connection.
 * `ESP8266mDNS` is used for advertising (Bonjour) 
 
-## TODO
-
-* ESP32 Arduino version (ESP32 Arduino is base on RTOS and it is not hard to port).
-
-
-## More examples and demos
-
-* Check [esp-homekit-demo](https://github.com/maximkulkin/esp-homekit-demo)
-
 ## Troubleshooting
 
 * Check your serial output with [example_serial_output.txt](https://raw.github.com/Mixiaoxiao/Arduino-HomeKit-ESP8266/master/extras/example_serial_output_v1.1.0.txt)
@@ -148,7 +145,21 @@ After memory optimization in v1.1.0:
 
 ## Change Log
 
+#### v1.4.0
+
+* Add `yield()` while crypto computing, to prevent WiFi disconnection. The idea is from [BbIKTOP-issues80](https://github.com/Yurik72/ESPHap/issues/80#issuecomment-803685175)
+* One new example.
+
+#### v1.3.0
+
+* Small improvements.
+
+#### v1.2.0
+
+* New examples.
+
 #### v1.1.0
+
 * Memory optimization: moved String/byte constants as much as possible to Flash. The `RODATA` section of `bin` is only 4672. Extra ~20K free-heap is available compared with v1.0.1.
 * Upload [ESP8266WiFi_nossl_noleak](https://github.com/Mixiaoxiao/Arduino-HomeKit-ESP8266/tree/master/extras/ESP8266WiFi_nossl_noleak/), a `nossl` and `noleak` version of the official `ESP8266WiFi` library of Arduino Core 2.6.3. Removed all codes of `SSL` to save memory (extra ~3K) since the HomeKit does not require SSL. Fix the memory-leak in `WiFiClinet.stop()` by adding `tcp_abandon(_pcb, 0)` in `stop()`, based on the idea of [esp8266/Arduino/pull/2767](https://github.com/esp8266/Arduino/pull/2767).
 

@@ -233,7 +233,7 @@ struct _homekit_accessory {
     unsigned int id;
 
     homekit_accessory_category_t category;
-    int config_number;
+    uint16_t config_number;
 
     homekit_service_t **services;
 };
@@ -324,13 +324,13 @@ homekit_characteristic_t *homekit_characteristic_clone(homekit_characteristic_t 
 void homekit_accessories_init(homekit_accessory_t **accessories);
 
 // Find accessory by ID. Returns NULL if not found
-homekit_accessory_t *homekit_accessory_by_id(homekit_accessory_t **accessories, int aid);
+homekit_accessory_t *homekit_accessory_by_id(homekit_accessory_t **accessories, uint32_t aid);
 // Find service inside accessory by service type. Returns NULL if not found
 homekit_service_t *homekit_service_by_type(homekit_accessory_t *accessory, const char *type);
 // Find characteristic inside service by type. Returns NULL if not found
 homekit_characteristic_t *homekit_service_characteristic_by_type(homekit_service_t *service, const char *type);
 // Find characteristic by accessory ID and characteristic ID. Returns NULL if not found
-homekit_characteristic_t *homekit_characteristic_by_aid_and_iid(homekit_accessory_t **accessories, int aid, int iid);
+homekit_characteristic_t *homekit_characteristic_by_aid_and_iid(homekit_accessory_t **accessories, uint32_t aid, uint32_t iid);
 
 void homekit_characteristic_notify(homekit_characteristic_t *ch, const homekit_value_t value);
 void homekit_characteristic_add_notify_callback(
@@ -359,7 +359,7 @@ bool homekit_characteristic_has_notify_callback(
 //=========================
 homekit_value_t HOMEKIT_NULL_CPP();
 homekit_value_t HOMEKIT_BOOL_CPP(bool value) ;
-homekit_value_t HOMEKIT_INT_CPP(uint8_t value);
+homekit_value_t HOMEKIT_INT_CPP(int value);
 homekit_value_t HOMEKIT_UINT8_CPP(uint8_t value);
 homekit_value_t HOMEKIT_UINT16_CPP(uint16_t value);
 homekit_value_t HOMEKIT_UINT32_CPP(uint32_t value);
